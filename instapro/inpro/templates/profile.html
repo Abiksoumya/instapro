@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+    <style>
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+            margin: 10 ;
+        }
+    </style>
+</head>
+<body>
+    <h1>Profile Details</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Get Profile">
+    </form>
+
+    {% if response %}
+        {% if response.error %}
+            <p>Error: {{ response.error }}</p>
+        {% else %}
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Full Name</th>
+                    <th>Bio</th>
+                    <th>Followers</th>
+                    <th>Following</th>
+                    <th>Stories</th>
+
+                </tr>
+                <tr>
+                    <td class="highlight">{{ response.username }}</td>
+                    <td>{{ response.full_name }}</td>
+                    <td>{{ response.bio }}</td>
+                    <td>{{ response.followers }}</td>
+                    <td>{{ response.following }}</td>
+                    <td>{{response.stories}}</td>
+                </tr>
+            </table>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
